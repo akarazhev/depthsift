@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:depthsift:companion:permit-resolution:1",
+  "title": "DepthSift requests.quiesced payload",
+  "description": "Specification 1.2, sections 9.5 and 11.4. Validation establishes structure, not the truth of upstream completion. Check the pending quiesce request, journal identities, scope, epoch, unique permit IDs, disjoint lists and actual evidence before changing any reservation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["quiesce_id", "limit_scope_id", "limit_epoch", "resolutions", "unresolved_permit_ids"],
+  "properties": {
+    "quiesce_id": {"$ref": "#/$defs/id"},
+    "limit_scope_id": {"$ref": "#/$defs/id"},
+    "limit_epoch": {"type": "integer", "minimum": 0},
+    "resolutions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/resolution"}
+    },
+    "unresolved_permit_ids": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/id"}
+    }
+  },
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "\\S"},
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "observer_id", "observed_at", "method", "source_execution_context_id", "artifact_ref"],
+      "properties": {
+        "evidence_id": {"$ref": "#/$defs/id"},
+        "observer_id": {"$ref": "#/$defs/id"},
+        "observed_at": {"type": "string", "format": "date-time"},
+        "method": {
+          "enum": ["DISPATCH_BARRIER", "UPSTREAM_TERMINAL_OUTCOME", "VERIFIED_EXECUTION_CONTEXT_STOP"]
+        },
+        "source_execution_context_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+        "artifact_ref": {"type": "string", "pattern": "^evidence:[A-Za-z0-9_-]{1,128}$"}
+      }
+    },
+    "resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["permit_id", "origin_session_id", "outcome", "evidence"],
+      "properties": {
+        "permit_id": {"$ref": "#/$defs/id"},
+        "origin_session_id": {"$ref": "#/$defs/id"},
+        "outcome": {"enum": ["NOT_DISPATCHED", "COMPLETED", "EXECUTION_CONTEXT_CLOSED"]},
+        "evidence": {"$ref": "#/$defs/evidence"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"outcome": {"const": "NOT_DISPATCHED"}}},
+          "then": {"properties": {"evidence": {"properties": {"method": {"const": "DISPATCH_BARRIER"}}}}}
+        },
+        {
+          "if": {"properties": {"outcome": {"const": "COMPLETED"}}},
+          "then": {
+            "properties": {
+              "evidence": {
+                "properties": {
+                  "method": {"const": "UPSTREAM_TERMINAL_OUTCOME"},
+                  "source_execution_context_id": {"$ref": "#/$defs/id"}
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"outcome": {"const": "EXECUTION_CONTEXT_CLOSED"}}},
+          "then": {
+            "properties": {
+              "evidence": {
+                "properties": {
+                  "method": {"const": "VERIFIED_EXECUTION_CONTEXT_STOP"},
+                  "source_execution_context_id": {"$ref": "#/$defs/id"}
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

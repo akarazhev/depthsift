@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:depthsift:companion:envelope:1",
+  "title": "DepthSift Companion protocol 1 envelope",
+  "description": "Specification 1.2, section 9.5. Validates the common envelope and the requests.quiesced payload. Other operation payloads need their own schemas before capability activation. Session, sequence, correlation, duplicate JSON keys and byte-size checks are mandatory outside JSON Schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol_version", "message_type", "session_id", "message_id", "seq", "payload"],
+  "properties": {
+    "protocol_version": {"const": 1},
+    "message_type": {
+      "enum": [
+        "hello", "welcome", "health", "heartbeat", "connections.list",
+        "instruments.list", "terminal.targets.list", "terminal.target.state",
+        "limit.pause", "limit.paused", "requests.quiesce", "requests.quiesced",
+        "book.snapshot.request", "book.snapshot.response", "instrument.open",
+        "request.cancel", "error"
+      ]
+    },
+    "session_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "message_id": {"$ref": "#/$defs/id"},
+    "request_id": {"$ref": "#/$defs/id"},
+    "seq": {"type": "integer", "minimum": 0},
+    "payload": {"type": "object"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"message_type": {"const": "hello"}}},
+      "then": {
+        "properties": {"session_id": {"type": "null"}},
+        "not": {"required": ["request_id"]}
+      },
+      "else": {"properties": {"session_id": {"$ref": "#/$defs/id"}}}
+    },
+    {
+      "if": {"properties": {"message_type": {"enum": ["hello", "welcome"]}}},
+      "then": {"properties": {"seq": {"const": 0}}},
+      "else": {"properties": {"seq": {"minimum": 1}}}
+    },
+    {
+      "if": {"properties": {"message_type": {"enum": ["welcome", "book.snapshot.response", "limit.paused", "requests.quiesced"]}}},
+      "then": {"required": ["request_id"]}
+    },
+    {
+      "if": {"properties": {"message_type": {"const": "requests.quiesced"}}},
+      "then": {"properties": {"payload": {"$ref": "urn:depthsift:companion:permit-resolution:1"}}}
+    }
+  ],
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "\\S"}
+  }
+}
