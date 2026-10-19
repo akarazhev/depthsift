@@ -1,0 +1,4 @@
+{"protocol_version": 1, "message_type": "hello", "session_id": "sess-0001", "message_id": "msg-hello-0001", "seq": 0,
+ "payload": {"companion_id": "companion-7f3a", "companion_instance_id": "companion-7f3a-run-5c2e", "companion_version": "0.1.0", "protocol_versions": [1],
+  "auth": {"kind": "pairing_token", "value": "pt-example-token-not-a-real-secret"}, "platform": {"os": "windows", "arch": "x64", "emulated": true},
+  "operations": ["book.snapshot"], "sdk_version": null, "terminal_version": null, "limits": {"max_message_bytes": 16777216, "max_concurrent_reads": 4}}}

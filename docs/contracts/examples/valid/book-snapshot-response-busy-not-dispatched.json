@@ -1,0 +1,37 @@
+{
+  "protocol_version": 1,
+  "message_type": "book.snapshot.response",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0002",
+  "request_id": "msg-c-0002",
+  "seq": 2,
+  "payload": {
+    "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+    "logical_connection_key": "mexc:spot:main",
+    "binding_id": "mexc-spot-main",
+    "binding_revision": 1,
+    "source_epoch": 2,
+    "request_generation": 18,
+    "permit_id": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+    "limit_scope_id": "mexc-spot-ip",
+    "limit_epoch": 3,
+    "outcome": "error",
+    "not_dispatched": true,
+    "execution_context_id": null,
+    "resolution": {
+      "permit_id": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+      "origin_session_id": "sess-0001",
+      "outcome": "NOT_DISPATCHED",
+      "evidence": {
+        "evidence_id": "ev-0002",
+        "observer_id": "companion-7f3a-run-5c2e",
+        "observed_at": "2026-10-19T18:05:01Z",
+        "method": "DISPATCH_BARRIER",
+        "source_execution_context_id": null,
+        "artifact_ref": "evidence:companion-7f3a-0002"
+      }
+    },
+    "snapshot": null,
+    "error": {"code": "BUSY", "message": "All read slots are occupied", "retryable": true}
+  }
+}

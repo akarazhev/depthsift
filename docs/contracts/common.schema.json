@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:depthsift:companion:common:1",
+  "title": "DepthSift Companion protocol 1 shared definitions",
+  "description": "Specification 1.3, sections 4.1, 6.3, 9.3 and 9.4. Identifiers, decimal strings, instrument keys, operations and typed errors shared by the payload schemas. Decimal strings carry exact values: no sign, no exponent, no NaN or Infinity.",
+  "$defs": {
+    "id": {"type": "string", "minLength": 1, "maxLength": 128, "pattern": "\\S"},
+    "nullable_id": {"oneOf": [{"$ref": "#/$defs/id"}, {"type": "null"}]},
+    "decimal": {"type": "string", "maxLength": 64, "pattern": "^(0|[1-9][0-9]*)(\\.[0-9]+)?$"},
+    "nullable_decimal": {"oneOf": [{"$ref": "#/$defs/decimal"}, {"type": "null"}]},
+    "epoch": {"type": "integer", "minimum": 0},
+    "revision": {"type": "integer", "minimum": 1},
+    "milliseconds": {"type": "integer", "minimum": 0},
+    "nullable_milliseconds": {"oneOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+    "version_string": {"type": "string", "minLength": 1, "maxLength": 64},
+    "nullable_version_string": {"oneOf": [{"$ref": "#/$defs/version_string"}, {"type": "null"}]},
+    "instrument_key": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["exchange_id", "market_type", "base_asset", "quote_asset", "venue_symbol"],
+      "properties": {
+        "exchange_id": {"$ref": "#/$defs/id"},
+        "market_type": {"$ref": "#/$defs/id"},
+        "base_asset": {"$ref": "#/$defs/id"},
+        "quote_asset": {"$ref": "#/$defs/id"},
+        "venue_symbol": {"$ref": "#/$defs/id"}
+      }
+    },
+    "operation": {
+      "enum": [
+        "connections.list", "instruments.list", "terminal.targets.list", "terminal.target.state",
+        "book.snapshot", "instrument.open", "request.cancel", "limit.pause", "requests.quiesce", "health"
+      ]
+    },
+    "limits": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["max_message_bytes", "max_concurrent_reads"],
+      "properties": {
+        "max_message_bytes": {"type": "integer", "minimum": 65536, "maximum": 1073741824},
+        "max_concurrent_reads": {"type": "integer", "minimum": 1, "maximum": 16}
+      }
+    },
+    "error_code": {
+      "enum": [
+        "AUTH_REQUIRED", "PROTOCOL_INCOMPATIBLE", "CONNECTION_MISSING", "CONNECTION_NOT_READY",
+        "CONNECTION_AMBIGUOUS", "TARGET_UNAVAILABLE", "UNSUPPORTED_CAPABILITY", "RATE_LIMITED",
+        "BUSY", "TIMEOUT", "INVALID_DATA", "STALE_SESSION", "BACKPRESSURE", "INTERNAL_ERROR"
+      ]
+    },
+    "typed_error": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message", "retryable"],
+      "properties": {
+        "code": {"$ref": "#/$defs/error_code"},
+        "message": {"type": "string", "maxLength": 1000},
+        "retryable": {"type": "boolean"}
+      }
+    }
+  }
+}

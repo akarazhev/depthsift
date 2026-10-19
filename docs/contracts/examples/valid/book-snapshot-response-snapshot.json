@@ -1,0 +1,41 @@
+{
+  "protocol_version": 1,
+  "message_type": "book.snapshot.response",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0001",
+  "request_id": "msg-c-0001",
+  "seq": 1,
+  "payload": {
+    "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+    "logical_connection_key": "mexc:spot:main",
+    "binding_id": "mexc-spot-main",
+    "binding_revision": 1,
+    "source_epoch": 2,
+    "request_generation": 17,
+    "permit_id": "3f1d2c4e-9a8b-4c7d-8e6f-5a4b3c2d1e0f",
+    "limit_scope_id": "mexc-spot-ip",
+    "limit_epoch": 3,
+    "outcome": "snapshot",
+    "not_dispatched": false,
+    "execution_context_id": "companion-7f3a-run-5c2e:terminal-pid-4120-1760900000",
+    "resolution": null,
+    "snapshot": {
+      "received_at_ms": 184233,
+      "fresh_on_request": true,
+      "source_timestamp_ms": 1760900123456,
+      "upstream_update_id": null,
+      "zoom_index": 0,
+      "grouping": "NONE",
+      "continuous_from_top": true,
+      "best_bid": "1.000",
+      "best_ask": "1.004",
+      "bids": [["1.000", "800"], ["0.995", "800"], ["0.990", "500"], ["0.989", "1200"]],
+      "asks": [["1.004", "300"], ["1.010", "900"]],
+      "coverage": {
+        "bids": {"complete": true, "basis": "SOURCE_CONTRACT", "levels_returned": 4, "boundary_price": "0.989"},
+        "asks": {"complete": false, "basis": "UNCONFIRMED", "levels_returned": 2, "boundary_price": "1.010"}
+      }
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,5 @@
+{"protocol_version": 1, "message_type": "limit.paused", "session_id": "sess-0001", "message_id": "msg-p-0030", "request_id": "msg-c-0030", "seq": 8,
+ "payload": {"limit_scope_id": "mexc-spot-ip", "limit_epoch": 4,
+  "resolutions": [{"permit_id": "d4e5f6a7-b8c9-4d0e-9f1a-2b3c4d5e6f7a", "origin_session_id": "sess-0001", "outcome": "COMPLETED",
+   "evidence": {"evidence_id": "ev-0030", "observer_id": "companion-7f3a-run-5c2e", "observed_at": "2026-10-19T18:07:10Z", "method": "UPSTREAM_TERMINAL_OUTCOME", "source_execution_context_id": "ctx-1", "artifact_ref": "evidence:companion-7f3a-0030"}}],
+  "in_progress_permit_ids": []}}

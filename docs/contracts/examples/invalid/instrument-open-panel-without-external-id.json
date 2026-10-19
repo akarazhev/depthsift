@@ -1,0 +1,4 @@
+{"protocol_version": 1, "message_type": "instrument.open", "session_id": "sess-0001", "message_id": "msg-c-0010", "seq": 4,
+ "payload": {"terminal_target_ref": "metascalp-selected-panel", "target": {"kind": "panel", "external_id": null, "link_group": null},
+  "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+  "logical_connection_key": "mexc:spot:main", "confirm_timeout_ms": 3000}}

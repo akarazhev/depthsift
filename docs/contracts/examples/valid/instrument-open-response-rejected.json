@@ -1,0 +1,15 @@
+{
+  "protocol_version": 1,
+  "message_type": "instrument.open",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0011",
+  "request_id": "msg-c-0011",
+  "seq": 5,
+  "payload": {
+    "status": "rejected",
+    "method": null,
+    "connection_id_used": null,
+    "observed_state": null,
+    "error": {"code": "CONNECTION_AMBIGUOUS", "message": "Two connections match mexc:spot", "retryable": false}
+  }
+}

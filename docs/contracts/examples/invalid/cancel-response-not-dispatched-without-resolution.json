@@ -1,0 +1,2 @@
+{"protocol_version": 1, "message_type": "request.cancel", "session_id": "sess-0001", "message_id": "msg-p-0020", "request_id": "msg-c-0020", "seq": 6,
+ "payload": {"target_request_id": "msg-c-0003", "permit_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e", "outcome": "NOT_DISPATCHED", "resolution": null, "execution_context_id": null}}

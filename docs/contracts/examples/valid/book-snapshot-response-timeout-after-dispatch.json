@@ -1,0 +1,25 @@
+{
+  "protocol_version": 1,
+  "message_type": "book.snapshot.response",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0003",
+  "request_id": "msg-c-0003",
+  "seq": 3,
+  "payload": {
+    "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+    "logical_connection_key": "mexc:spot:main",
+    "binding_id": "mexc-spot-main",
+    "binding_revision": 1,
+    "source_epoch": 2,
+    "request_generation": 19,
+    "permit_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e",
+    "limit_scope_id": "mexc-spot-ip",
+    "limit_epoch": 3,
+    "outcome": "error",
+    "not_dispatched": false,
+    "execution_context_id": "companion-7f3a-run-5c2e:terminal-pid-4120-1760900000",
+    "resolution": null,
+    "snapshot": null,
+    "error": {"code": "TIMEOUT", "message": "Upstream read did not finish within timeout", "retryable": true}
+  }
+}

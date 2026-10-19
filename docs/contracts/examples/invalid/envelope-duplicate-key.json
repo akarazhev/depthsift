@@ -1,0 +1,2 @@
+{"protocol_version": 1, "message_type": "limit.pause", "session_id": "sess-0001", "message_id": "msg-c-0030", "seq": 8,
+ "payload": {"limit_scope_id": "mexc-spot-ip", "limit_epoch": 4, "limit_epoch": 5, "min_wait_ms": 12000}}

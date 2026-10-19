@@ -1,0 +1,18 @@
+{
+  "protocol_version": 1,
+  "message_type": "welcome",
+  "session_id": "sess-0001",
+  "message_id": "msg-welcome-0001",
+  "request_id": "msg-hello-0001",
+  "seq": 0,
+  "payload": {
+    "client_version": "0.1.0",
+    "protocol_version": 1,
+    "accepted_operations": ["connections.list", "instruments.list", "book.snapshot", "instrument.open", "request.cancel", "limit.pause", "requests.quiesce", "health"],
+    "heartbeat_interval_ms": 2000,
+    "disconnect_after_ms": 6000,
+    "limits": {"max_message_bytes": 16777216, "max_concurrent_reads": 4},
+    "limit_scopes": [{"limit_scope_id": "mexc-spot-ip", "limit_epoch": 3, "remaining_pause_ms": null}],
+    "connection_secret": "cs-example-secret-value-not-real-0123456789"
+  }
+}

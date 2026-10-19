@@ -1,0 +1,20 @@
+{
+  "protocol_version": 1,
+  "message_type": "instrument.open",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0010",
+  "request_id": "msg-c-0010",
+  "seq": 4,
+  "payload": {
+    "status": "confirmed",
+    "method": "panel_ticker_put",
+    "connection_id_used": "17",
+    "observed_state": {
+      "external_id": "doc-8f2e",
+      "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+      "logical_connection_key": "mexc:spot:main",
+      "observed_at_ms": 190511
+    },
+    "error": null
+  }
+}

@@ -1,0 +1,5 @@
+{"protocol_version": 1, "message_type": "request.cancel", "session_id": "sess-0001", "message_id": "msg-p-0020", "request_id": "msg-c-0020", "seq": 6,
+ "payload": {"target_request_id": "msg-c-0003", "permit_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e", "outcome": "NOT_DISPATCHED",
+  "resolution": {"permit_id": "7b8c9d0e-1f2a-4b3c-9d4e-5f6a7b8c9d0e", "origin_session_id": "sess-0001", "outcome": "NOT_DISPATCHED",
+   "evidence": {"evidence_id": "ev-0020", "observer_id": "companion-7f3a-run-5c2e", "observed_at": "2026-10-19T18:06:40Z", "method": "UPSTREAM_TERMINAL_OUTCOME", "source_execution_context_id": "ctx-1", "artifact_ref": "evidence:companion-7f3a-0020"}},
+  "execution_context_id": null}}

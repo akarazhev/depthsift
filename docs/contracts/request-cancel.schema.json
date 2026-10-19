@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:depthsift:companion:request-cancel:1",
+  "title": "DepthSift request.cancel request and response payloads",
+  "description": "Specification 1.3, sections 9.2, 9.5 and 11.4. The request names one earlier read by target_request_id and permit_id. The response outcome NOT_DISPATCHED must carry a NOT_DISPATCHED resolution with DISPATCH_BARRIER evidence; only that releases the reservation. ALREADY_STARTED, COMPLETED and UNKNOWN_REQUEST never release weight. The envelope selects request or response by the presence of request_id.",
+  "oneOf": [{"$ref": "#/$defs/request"}, {"$ref": "#/$defs/response"}],
+  "$defs": {
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_request_id", "permit_id"],
+      "properties": {
+        "target_request_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"},
+        "permit_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"}
+      }
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_request_id", "permit_id", "outcome", "resolution", "execution_context_id"],
+      "properties": {
+        "target_request_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"},
+        "permit_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"},
+        "outcome": {"enum": ["NOT_DISPATCHED", "ALREADY_STARTED", "COMPLETED", "UNKNOWN_REQUEST"]},
+        "resolution": {"oneOf": [{"$ref": "urn:depthsift:companion:permit-resolution:1#/$defs/resolution"}, {"type": "null"}]},
+        "execution_context_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/nullable_id"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"outcome": {"const": "NOT_DISPATCHED"}}},
+          "then": {
+            "properties": {
+              "resolution": {
+                "$ref": "urn:depthsift:companion:permit-resolution:1#/$defs/resolution",
+                "properties": {"outcome": {"const": "NOT_DISPATCHED"}}
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"outcome": {"enum": ["ALREADY_STARTED", "COMPLETED", "UNKNOWN_REQUEST"]}}},
+          "then": {"properties": {"resolution": {"type": "null"}}}
+        },
+        {
+          "if": {"properties": {"outcome": {"enum": ["ALREADY_STARTED", "COMPLETED"]}}},
+          "then": {"properties": {"execution_context_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"}}}
+        }
+      ]
+    }
+  }
+}

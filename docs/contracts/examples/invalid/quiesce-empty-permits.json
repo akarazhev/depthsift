@@ -1,0 +1,2 @@
+{"protocol_version": 1, "message_type": "requests.quiesce", "session_id": "sess-0001", "message_id": "msg-c-0040", "seq": 9,
+ "payload": {"quiesce_id": "q-0001", "limit_scope_id": "mexc-spot-ip", "limit_epoch": 4, "permit_ids": []}}

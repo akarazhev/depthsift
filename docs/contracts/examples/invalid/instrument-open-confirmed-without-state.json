@@ -1,0 +1,2 @@
+{"protocol_version": 1, "message_type": "instrument.open", "session_id": "sess-0001", "message_id": "msg-p-0010", "request_id": "msg-c-0010", "seq": 4,
+ "payload": {"status": "confirmed", "method": "panel_ticker_put", "connection_id_used": "17", "observed_state": null, "error": null}}

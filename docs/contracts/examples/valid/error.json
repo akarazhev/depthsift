@@ -1,0 +1,9 @@
+{
+  "protocol_version": 1,
+  "message_type": "error",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0050",
+  "request_id": "msg-c-0050",
+  "seq": 10,
+  "payload": {"code": "UNSUPPORTED_CAPABILITY", "message": "terminal.target.state is not available in this SDK version", "retryable": false}
+}

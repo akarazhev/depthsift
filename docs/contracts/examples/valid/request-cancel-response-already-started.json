@@ -1,0 +1,15 @@
+{
+  "protocol_version": 1,
+  "message_type": "request.cancel",
+  "session_id": "sess-0001",
+  "message_id": "msg-p-0021",
+  "request_id": "msg-c-0021",
+  "seq": 7,
+  "payload": {
+    "target_request_id": "msg-c-0004",
+    "permit_id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+    "outcome": "ALREADY_STARTED",
+    "resolution": null,
+    "execution_context_id": "companion-7f3a-run-5c2e:terminal-pid-4120-1760900000"
+  }
+}

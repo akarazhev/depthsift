@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:depthsift:companion:limit-pause:1",
+  "title": "DepthSift limit.pause and limit.paused payloads",
+  "description": "Specification 1.3, sections 9.5, 11.3 and 11.4. limit.pause carries the scope, its new epoch and the minimum remaining wait. limit.paused confirms the same scope and epoch, lists operations that never started as NOT_DISPATCHED resolutions and names operations already in progress; an old confirmation never resumes requests.",
+  "oneOf": [{"$ref": "#/$defs/pause"}, {"$ref": "#/$defs/paused"}],
+  "$defs": {
+    "pause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["limit_scope_id", "limit_epoch", "min_wait_ms"],
+      "properties": {
+        "limit_scope_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"},
+        "limit_epoch": {"$ref": "urn:depthsift:companion:common:1#/$defs/epoch"},
+        "min_wait_ms": {"type": "integer", "minimum": 0, "maximum": 3600000}
+      }
+    },
+    "paused": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["limit_scope_id", "limit_epoch", "resolutions", "in_progress_permit_ids"],
+      "properties": {
+        "limit_scope_id": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"},
+        "limit_epoch": {"$ref": "urn:depthsift:companion:common:1#/$defs/epoch"},
+        "resolutions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "$ref": "urn:depthsift:companion:permit-resolution:1#/$defs/resolution",
+            "properties": {"outcome": {"const": "NOT_DISPATCHED"}}
+          }
+        },
+        "in_progress_permit_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"$ref": "urn:depthsift:companion:common:1#/$defs/id"}
+        }
+      }
+    }
+  }
+}

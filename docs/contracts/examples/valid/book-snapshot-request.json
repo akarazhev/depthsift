@@ -1,0 +1,23 @@
+{
+  "protocol_version": 1,
+  "message_type": "book.snapshot.request",
+  "session_id": "sess-0001",
+  "message_id": "msg-c-0001",
+  "seq": 1,
+  "payload": {
+    "instrument_key": {"exchange_id": "mexc", "market_type": "spot", "base_asset": "ABC", "quote_asset": "USDT", "venue_symbol": "ABCUSDT"},
+    "logical_connection_key": "mexc:spot:main",
+    "profile_id": "example-profile",
+    "config_revision": 1,
+    "binding_id": "mexc-spot-main",
+    "binding_revision": 1,
+    "source_epoch": 2,
+    "request_generation": 17,
+    "timeout_ms": 4000,
+    "permit_id": "3f1d2c4e-9a8b-4c7d-8e6f-5a4b3c2d1e0f",
+    "limit_scope_id": "mexc-spot-ip",
+    "limit_epoch": 3,
+    "weight": 3,
+    "params": {"zoom_index": 0}
+  }
+}
